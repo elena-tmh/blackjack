@@ -43,3 +43,35 @@ def test_compare():
 
 def test_greater_than():
     assert True == (Card('spade', 'Q') > Card('spade', 3))
+
+def test_init_deck():
+    deck = Deck()
+
+    #assert deck.number_of_cards == 52, not needed as it is doubled, due to the lengght
+    assert len(deck.cards) == 52
+
+def test_shuffle_deck():
+
+    deck_a = Deck() # instance of deck
+    deck_b = Deck()
+
+    for c_a, c_b in zip(deck_a.cards, deck_b.cards):
+        assert c_a.value == c_b.value
+
+    # ok, the decks are identical
+    # now let's shuffle them
+
+    deck_b.shuffle()
+
+    randomness = []
+
+    for c_a, c_b in zip(deck_a.cards, deck_b.cards):
+        randomness.append(c_a.value != c_b.value)
+
+    assert any(randomness)
+
+def deal_hands():
+    pass
+
+def test_proper_rep():
+    assert "A of spades" == repr(Card("spade", "A"))
